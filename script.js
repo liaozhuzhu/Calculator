@@ -1,26 +1,30 @@
 let buttons = document.querySelectorAll(".buttons");
+let topScreen = document.getElementById("top-screen");
 let botScreen = document.getElementById("bot-screen");
+let operand = "";
+let result = "";
 
 function display(input) {
-    if (input = "C") {
+    topScreen.innerHTML = botScreen.innerHTML;
+    // Special Cases
+    if (input == "C") {
+        topScreen.innerHTML = "";
         botScreen.innerHTML = "";
     }
-    if (input = "=") {
+    if (input == "=") {
         calculate();
     }
-    else {
+    // Number Buttons
+    else if (input != "C" && input != "=") {
         botScreen.style.fontSize = "30px";
         botScreen.innerHTML += input;
-        formula(input);
     }
 }
 
-function formula(input) {
-    
-}
-
-function calculate(answer) {
-
+function calculate() {
+    result = eval(botScreen.innerHTML);
+    botScreen.innerHTML = result;
+    topScreen += " = " + result;
 }
 
 buttons.forEach(function(buttonClick) {

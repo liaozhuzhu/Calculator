@@ -33,20 +33,16 @@ body {
     height: 80px;
     margin-bottom: 50px;
     border-radius: 10px;
+    overflow-x: auto;
+    text-align: right;
 }
 
 #bot-screen {
-    text-align: right;
     margin-bottom: 0px;
-    border: 1px solid red;
 }
 
 .row {
     text-align: right;
-}
-
-.dud {
-    visibility: hidden;
 }
 
 button {
