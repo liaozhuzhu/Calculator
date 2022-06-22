@@ -1,18 +1,18 @@
 let buttons = document.querySelectorAll(".buttons");
 let topScreen = document.getElementById("top-screen");
 let botScreen = document.getElementById("bot-screen");
-let operand = "";
 let result = "";
 let func = "";
+let finished = false;
 
 function display(input) {
-    if (rerun == true) {
-        botScreen.innerHTML = "";
-    }
     // Special Cases
+    if (finished == true) {
+        clear();
+        finished = false;
+    }
     if (input == "C") {
-        topScreen.innerHTML = "";
-        botScreen.innerHTML = "";
+        clear();
     }
     if (input == "=") {
         calculate();
@@ -28,6 +28,11 @@ function display(input) {
     }
 }
 
+function clear() {
+    topScreen.innerHTML = "";
+    botScreen.innerHTML = "";
+}
+
 function calculate() {
     if (botScreen.innerHTML == "") {
         return;
@@ -35,6 +40,7 @@ function calculate() {
     result = Math.round(eval(botScreen.innerHTML)*1000)/1000;
     botScreen.innerHTML = result;
     topScreen.innerHTML += "=" + result;
+    finished = true;
 }
 
 function useAnswer() {
@@ -42,8 +48,32 @@ function useAnswer() {
     botScreen.innerHTML += result;
 }
 
+// Buttons / Key Press
 buttons.forEach(function(buttonClick) {
     buttonClick.addEventListener("click", () => {
         display(buttonClick.value);
     });
 });
+
+window.addEventListener("keydown", checkKeyPress, false);
+function checkKeyPress(key) {
+    display(String.fromCharCode(key.keyCode));
+    /*
+  if (key.keyCode == 13 || key.keyCode == 187) {
+    key.preventDefault();
+    calculate();
+  }
+  if (key.keyCode == 67) {
+    clear();
+  }
+  if (key.keyCode == 65) {
+    useAnswer();
+  }
+  if (key.keyCode >= 106 && key.keyCode <= 111) {
+    display(String.fromCharCode(key.keyCode));
+  }
+  if (key.keyCode >= 48 && key.keyCode <= 57) {
+    display(String.fromCharCode(key.keyCode));
+  }
+  */
+}
