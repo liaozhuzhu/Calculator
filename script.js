@@ -3,13 +3,11 @@ let topScreen = document.getElementById("top-screen");
 let botScreen = document.getElementById("bot-screen");
 let operand = "";
 let result = "";
-let rerun = false;
 let func = "";
 
 function display(input) {
     if (rerun == true) {
         botScreen.innerHTML = "";
-        rerun = false;
     }
     // Special Cases
     if (input == "C") {
@@ -31,14 +29,12 @@ function display(input) {
 }
 
 function calculate() {
-    if (botScreen.innerHTML == "" || rerun == true) {
+    if (botScreen.innerHTML == "") {
         return;
     }
     result = Math.round(eval(botScreen.innerHTML)*1000)/1000;
     botScreen.innerHTML = result;
-    ;
     topScreen.innerHTML += "=" + result;
-    rerun = true;
 }
 
 function useAnswer() {
