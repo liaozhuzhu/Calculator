@@ -94,7 +94,7 @@ buttons.forEach(function(buttonClick) {
 
 window.addEventListener("keydown", checkKeyPress, false);
 function checkKeyPress(key) {
-    if (key.keyCode == 13 || key.keyCode == 187) {
+    if (key.keyCode == 13 || (key.keyCode == 187 && !key.shiftKey)) {
         key.preventDefault();
         calculate();
     }
@@ -104,15 +104,17 @@ function checkKeyPress(key) {
     if (key.keyCode == 65) {
         useAnswer();
     }
-    if (key.keyCode >= 48 && key.keyCode <= 57) {
-        display(String.fromCharCode(key.keyCode));
-    }
     if (key.keyCode == 8) {
         backspace();
     }
-
-    // Operands
-    //
+    if (key.keyCode >= 48 && key.keyCode <= 57) {
+        if(key.keyCode == 56 && key.shiftKey) {
+            display(String.fromCharCode(42));
+        }
+        else if (!key.shiftKey){
+            display(String.fromCharCode(key.keyCode));
+        } 
+    }
     // Subtraction
     if (key.keyCode == 189) {
         display(String.fromCharCode(45));
@@ -124,9 +126,5 @@ function checkKeyPress(key) {
     // Divison
     if (key.keyCode == 191) {
         display(String.fromCharCode(47));
-    }
-    // Multiplication
-    if(key.keyCode == 56 && key.shiftKey) {
-        display(String.fromCharCode(42));
     }
 }
