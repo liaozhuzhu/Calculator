@@ -104,8 +104,12 @@ function checkKeyPress(key) {
     if (key.keyCode == 65) {
         useAnswer();
     }
-    if (key.keyCode == 45 || key.keyCode == 057) {
+    // Operands
+    if (key.keyCode == 189) {
         display(String.fromCharCode(45));
+    }
+    if (key.keyCode == 191) {
+        display(String.fromCharCode(47));
     }
     if (key.keyCode >= 48 && key.keyCode <= 57) {
         display(String.fromCharCode(key.keyCode));
