@@ -94,13 +94,6 @@ buttons.forEach(function(buttonClick) {
 
 window.addEventListener("keydown", checkKeyPress, false);
 function checkKeyPress(key) {
-    if (key.keyCode >= 106 || key.keyCode <= 111 && key.keyCode != 16) {
-        if (key.shiftKey) {
-            if (key.keyCode == 54) {
-                display()
-            }
-        }
-    }
     if (key.keyCode == 13 || key.keyCode == 187) {
         key.preventDefault();
         calculate();
@@ -111,7 +104,10 @@ function checkKeyPress(key) {
     if (key.keyCode == 65) {
         useAnswer();
     }
+    if (key.keyCode == 45 || key.keyCode == 057) {
+        display(String.fromCharCode(45));
+    }
     if (key.keyCode >= 48 && key.keyCode <= 57) {
         display(String.fromCharCode(key.keyCode));
-  }
+    }
 }
