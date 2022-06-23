@@ -104,14 +104,29 @@ function checkKeyPress(key) {
     if (key.keyCode == 65) {
         useAnswer();
     }
+    if (key.keyCode >= 48 && key.keyCode <= 57) {
+        display(String.fromCharCode(key.keyCode));
+    }
+    if (key.keyCode == 8) {
+        backspace();
+    }
+
     // Operands
+    //
+    // Subtraction
     if (key.keyCode == 189) {
         display(String.fromCharCode(45));
     }
+    // Addition
+    if(key.keyCode == 187 && key.shiftKey) {
+        display(String.fromCharCode(43));
+    }
+    // Divison
     if (key.keyCode == 191) {
         display(String.fromCharCode(47));
     }
-    if (key.keyCode >= 48 && key.keyCode <= 57) {
-        display(String.fromCharCode(key.keyCode));
+    // Multiplication
+    if(key.keyCode == 56 && key.shiftKey) {
+        display(String.fromCharCode(42));
     }
 }
