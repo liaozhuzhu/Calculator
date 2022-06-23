@@ -6,6 +6,13 @@ let func = "";
 let finished = false;
 
 function display(input) {
+    if  (input == "+" || input == "-" || input == "*" || input == "/") {
+        if (botScreen.innerHTML == "") {
+            if (result != "") {
+                botScreen.innerHTML = result + botScreen.innerHTML;
+            }
+        }
+    }
     // Special Cases
     if (input == "=") {
         calculate();
@@ -20,10 +27,15 @@ function display(input) {
         useAnswer();
     }
     // Number Buttons
-    if (input != "C" && input != "=" && input != "back") {
+    if (input != "C" && input != "=" && input != "back" && input != "ans") {
         if (finished) {
-            botScreen.innerHTML = "";
-            finished = false;
+            if  (input == "+" || input == "-" || input == "*" || input == "/") {
+                finished = false;
+            }
+            else {
+                botScreen.innerHTML = "";
+                finished = false;
+            }
         }
         botScreen.style.fontSize = "30px";
         botScreen.innerHTML += input;
