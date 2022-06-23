@@ -7,21 +7,21 @@ let finished = false;
 
 function display(input) {
     // Special Cases
-    if (finished == true) {
-        clear();
-        finished = false;
+    if (input == "=") {
+        calculate();
     }
     if (input == "C") {
         clear();
-    }
-    if (input == "=") {
-        calculate();
     }
     if (input == "ans") {
         useAnswer();
     }
     // Number Buttons
     else if (input != "C" && input != "=") {
+        if (finished) {
+            botScreen.innerHTML = "";
+            finished = false;
+        }
         botScreen.style.fontSize = "30px";
         botScreen.innerHTML += input;
         topScreen.innerHTML = botScreen.innerHTML;
@@ -31,16 +31,22 @@ function display(input) {
 function clear() {
     topScreen.innerHTML = "";
     botScreen.innerHTML = "";
+    finished = false;
 }
 
 function calculate() {
+    if (finished) {
+        return;
+    }
     if (botScreen.innerHTML == "") {
         return;
     }
-    result = Math.round(eval(botScreen.innerHTML)*1000)/1000;
-    botScreen.innerHTML = result;
-    topScreen.innerHTML += "=" + result;
-    finished = true;
+    else {
+        result = Math.round(eval(botScreen.innerHTML)*1000)/1000;
+        botScreen.innerHTML = result;
+        topScreen.innerHTML += "=" + result;
+        finished = true;
+    }   
 }
 
 function useAnswer() {
@@ -57,23 +63,25 @@ buttons.forEach(function(buttonClick) {
 
 window.addEventListener("keydown", checkKeyPress, false);
 function checkKeyPress(key) {
-    display(String.fromCharCode(key.keyCode));
-    /*
-  if (key.keyCode == 13 || key.keyCode == 187) {
-    key.preventDefault();
-    calculate();
+    if (key.keyCode >= 106 || key.keyCode <= 111 && key.keyCode != 16) {
+        if (key.shiftKey) {
+            if (key.keyCode == 54) {
+                display()
+            }
+        }
+    }
+
+    if (key.keyCode == 13 || key.keyCode == 187) {
+        key.preventDefault();
+        calculate();
+    }
+    if (key.keyCode == 67) {
+        clear();
+    }
+    if (key.keyCode == 65) {
+        useAnswer();
+    }
+    if (key.keyCode >= 48 && key.keyCode <= 57) {
+        display(String.fromCharCode(key.keyCode));
   }
-  if (key.keyCode == 67) {
-    clear();
-  }
-  if (key.keyCode == 65) {
-    useAnswer();
-  }
-  if (key.keyCode >= 106 && key.keyCode <= 111) {
-    display(String.fromCharCode(key.keyCode));
-  }
-  if (key.keyCode >= 48 && key.keyCode <= 57) {
-    display(String.fromCharCode(key.keyCode));
-  }
-  */
 }
