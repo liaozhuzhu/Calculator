@@ -75,6 +75,11 @@ button:active {
 
 #back {
     background-color:rgb(0, 255, 30);
+    padding: 0px;
+}
+
+#back img {
+    width: 15px;
 }
 
 #equals {

@@ -13,11 +13,15 @@ function display(input) {
     if (input == "C") {
         clear();
     }
+    if (input == "back") {
+        backspace();
+    }
     if (input == "ans") {
         useAnswer();
     }
     // Number Buttons
-    else if (input != "C" && input != "=") {
+    else if (input != "C" && input != "=" && input != "back") {
+        console.log("huh");
         if (finished) {
             botScreen.innerHTML = "";
             finished = false;
@@ -54,6 +58,12 @@ function useAnswer() {
     botScreen.innerHTML += result;
 }
 
+function backspace() {
+    let str = botScreen.innerHTML.slice(0, -1);
+    botScreen.innerHTML = str;
+    topScreen.innerHTML = str;
+}
+
 // Buttons / Key Press
 buttons.forEach(function(buttonClick) {
     buttonClick.addEventListener("click", () => {
@@ -70,7 +80,6 @@ function checkKeyPress(key) {
             }
         }
     }
-
     if (key.keyCode == 13 || key.keyCode == 187) {
         key.preventDefault();
         calculate();
