@@ -6,6 +6,12 @@ let func = "";
 let finished = false;
 
 function display(input) {
+    // Check Operand Entered First
+    if (input == "+" || input == "-" || input == "*" || input == "/") {
+        if (result != "") {
+            botScreen.innerHTML = result + botScreen.innerHTML;
+        }
+    }
     // Special Cases
     if (input == "=") {
         calculate();
@@ -21,7 +27,6 @@ function display(input) {
     }
     // Number Buttons
     else if (input != "C" && input != "=" && input != "back") {
-        console.log("huh");
         if (finished) {
             botScreen.innerHTML = "";
             finished = false;
@@ -46,14 +51,24 @@ function calculate() {
         return;
     }
     else {
-        result = Math.round(eval(botScreen.innerHTML)*1000)/1000;
-        botScreen.innerHTML = result;
-        topScreen.innerHTML += "=" + result;
-        finished = true;
+        try {
+            result = Math.round(eval(botScreen.innerHTML)*1000)/1000;
+            botScreen.innerHTML = result;
+            topScreen.innerHTML += "=" + result;
+            finished = true; 
+        } catch (e) {
+            if (e instanceof SyntaxError) {
+                alert("ERROR");
+            }
+        }
     }   
 }
 
 function useAnswer() {
+    if (finished) {
+        topScreen.innerHTML = botScreen.innerHTML;
+        finished = false;
+    }
     topScreen.innerHTML += result;
     botScreen.innerHTML += result;
 }
