@@ -6,12 +6,6 @@ let func = "";
 let finished = false;
 
 function display(input) {
-    // Check Operand Entered First
-    if (input == "+" || input == "-" || input == "*" || input == "/") {
-        if (result != "") {
-            botScreen.innerHTML = result + botScreen.innerHTML;
-        }
-    }
     // Special Cases
     if (input == "=") {
         calculate();
@@ -26,7 +20,7 @@ function display(input) {
         useAnswer();
     }
     // Number Buttons
-    else if (input != "C" && input != "=" && input != "back") {
+    if (input != "C" && input != "=" && input != "back") {
         if (finished) {
             botScreen.innerHTML = "";
             finished = false;
