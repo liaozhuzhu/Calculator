@@ -122,7 +122,7 @@ function checkKeyPress(key) {
         display(key.key);
     }
     // Divison
-    if (key.keyCode == "/") {
+    if (key.key == "/") {
         display(key.key);
     }
     // Multiplication
