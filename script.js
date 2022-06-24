@@ -94,37 +94,39 @@ buttons.forEach(function(buttonClick) {
 
 window.addEventListener("keydown", checkKeyPress, false);
 function checkKeyPress(key) {
-    if (key.keyCode == 13 || (key.keyCode == 187 && !key.shiftKey)) {
+    if (key.key == "Enter" || key.key == "=" ) {
         key.preventDefault();
         calculate();
     }
-    if (key.keyCode == 67) {
+    if (key.key == "c") {
         clear();
     }
-    if (key.keyCode == 65) {
+    if (key.key == "a") {
         useAnswer();
     }
-    if (key.keyCode == 8) {
+    if (key.key == "Backspace") {
         backspace();
     }
-    if (key.keyCode >= 48 && key.keyCode <= 57) {
-        if(key.keyCode == 56 && key.shiftKey) {
-            display(String.fromCharCode(42));
-        }
-        else if (!key.shiftKey){
-            display(String.fromCharCode(key.keyCode));
-        } 
+    if (key.key == ".") {
+        display(key.key);
+    }
+    if (isFinite(key.key)) {
+        display(key.key);
     }
     // Subtraction
-    if (key.keyCode == 189) {
-        display(String.fromCharCode(45));
+    if (key.key == "-") {
+        display(key.key);
     }
     // Addition
-    if(key.keyCode == 187 && key.shiftKey) {
-        display(String.fromCharCode(43));
+    if(key.key == "+") {
+        display(key.key);
     }
     // Divison
-    if (key.keyCode == 191) {
-        display(String.fromCharCode(47));
+    if (key.keyCode == "/") {
+        display(key.key);
+    }
+    // Multiplication
+    if (key.key == "*") {
+        display(key.key);
     }
 }
